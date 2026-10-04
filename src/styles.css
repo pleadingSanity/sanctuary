@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #000103;
+  --color-navy: #0d1b2a;
+  --color-ink: #12263a;
+  --color-line: #1c3348;
+  --color-cyan: #00fff0;
+  --color-frost: #eef6ff;
+  --color-mist: #9eb0c4;
+  --color-dim: #6d8196;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --radius-md: 12px;
+  --radius-xl: 28px;
+}
+
+@layer base {
+  html {
+    height: 100%;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-night);
+    color: var(--color-frost);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    background: var(--color-night);
+    color: var(--color-frost);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select,
+  label {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 1rem;
+    line-height: 1.5;
+    appearance: none;
+    -webkit-appearance: none;
+    scroll-margin-bottom: 6rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: #00fff033;
+    color: var(--color-frost);
+  }
+}
+
+/* Phone chrome stays up for a coarse pointer even when the viewport is wide. */
+.desktop-nav {
+  display: none;
+}
+
+.phone-chrome {
+  display: block;
+}
+
+@media (min-width: 48rem) and (pointer: fine) {
+  .desktop-nav {
+    display: flex;
+  }
+
+  .phone-chrome {
+    display: none;
+  }
+}
+
+.sheet {
+  bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px));
+  max-height: min(70dvh, 28rem);
+  animation: rise 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bubble {
+  max-width: 85%;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
